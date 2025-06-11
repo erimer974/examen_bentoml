@@ -50,35 +50,35 @@ Organisation des dossiers et fichiers du projet :
 
 ## Exécution automatisée du pipeline (avec Airflow)
 
-    1. Créer le fichier d'environnement pour Airflow
+1. Créer le fichier d'environnement pour Airflow
     ```bash
     echo AIRFLOW_UID=50000 > .env
     echo AIRFLOW_GID=0 >> .env
     echo _AIRFLOW_WWW_USER_USERNAME=airflow >> .env
     echo _AIRFLOW_WWW_USER_PASSWORD=airflow >> .env
     ```
-    2. Créer les dossiers nécessaires
+2. Créer les dossiers nécessaires
     ```bash
     mkdir -p logs plugins data/raw data/preprocessed data/processed models metrics predictions
     ```
-    3. Définir les permissions
+3. Définir les permissions
     ```bash
     sudo chown -R 50000:50000 dags logs plugins data/ models/ metrics/ predictions/
     sudo chmod -R 755 data/ models/ metrics/ predictions/
     ```
-    4. Lancement de Airflow
+4. Lancement de Airflow
     - Initialiser Airflow : 
-    ```bash
-    docker-compose up airflow-init
-    ```
-    - Lancer tous les services : 
-    ```bash
-    docker-compose up -d
-    ```
+      ```bash
+      docker-compose up airflow-init
+      ```
+   - Lancer tous les services : 
+      ```bash
+      docker-compose up -d
+      ```
     - Vérifier l'état des services ("healthy") : 
-    ```bash
-    docker-compose ps
-    ```
+      ```bash
+      docker-compose ps
+      ```
     - Aller sur http://localhost:8080 et se connecter (Username: airflow / Password: airflow)
     - Trouver le dag `meteo_daily_update`
     - Cliquer sur Trigger DAG (bouton play)
